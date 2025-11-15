@@ -1,10 +1,5 @@
 # 🎓 Well-Calibrated and Interpretable Propensity Models for Bank Marketing
 
-Master’s Dissertation (M598, GISMA University of Applied Sciences)  
-Student: **Fereshteh Sefarkhani (FS2025)** · Supervisor: [Add name if known]  
-Department: Computer & Data Sciences (CDS) · Year: 2025  
-
----
 
 ## 🔍 Overview
 
@@ -88,7 +83,6 @@ The notebook generates:
 ## 🔒 Ethics & Data Integrity
 
 - Dataset is public (UCI). No personal identifiers are included.  
-- Analysis follows **GISMA’s ethics guidance** for reproducibility and data handling.  
 - All preprocessing and modeling steps are fully transparent and reproducible in the notebook.  
 
 ---
@@ -105,6 +99,5 @@ If referencing this work, please cite:
 ## 👩‍💻 Author
 
 **Fereshteh Sefarkhani**  
-*MSc Data Science — GISMA University of Applied Sciences*  
 📧 [fereshteh.safarkhani@gmail.com](mailto:fereshteh.safarkhani@gmail.com)  
 🌍 Berlin, Germany
