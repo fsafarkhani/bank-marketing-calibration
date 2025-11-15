@@ -23,7 +23,7 @@ It is based on the **UCI Bank Marketing dataset**, where the goal is to predict 
 
 ## 📦 Dataset
 
-- **Source:** UCI Machine Learning Repository – Bank Marketing Data  
+- **Source:** UCI Machine Learning Repository – Bank Marketing Data  "https://archive.ics.uci.edu/dataset/222/bank+marketing"
 - **Target:** `y` (term deposit subscription: yes/no)  
 - **Leakage removed:** `duration`  
 - **Added features:** `was_contacted_before`, `poutcome_success`  
