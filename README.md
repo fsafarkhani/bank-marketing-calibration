@@ -1,76 +1,140 @@
-# 🎓 Well-Calibrated and Interpretable Bank Marketing Models
+# 🎓 Well-Calibrated and Interpretable Propensity Models for Bank Marketing
 
-This repository includes my MSc Data Science dissertation project at **GISMA University of Applied Sciences**.  
-The main goal of this work is to build reliable and interpretable machine learning models that can predict whether a bank client will subscribe to a term deposit after a marketing campaign.
-
----
-
-## 🧠 Project Motivation
-
-Traditional predictive models often focus on accuracy but ignore **probability calibration** — how well predicted probabilities reflect reality.  
-In banking and marketing, this can lead to poor targeting decisions and wasted resources.
-
-This project aims to:
-- Compare different calibration techniques (Isotonic and Sigmoid)  
-- Improve reliability and interpretability of predictions  
-- Provide clear business insights that can guide campaign policy  
+Master’s Dissertation (M598, GISMA University of Applied Sciences)  
+Student: **Fereshteh Sefarkhani (FS2025)** · Supervisor: [Add name if known]  
+Department: Computer & Data Sciences (CDS) · Year: 2025  
 
 ---
 
-## ⚙️ Methods and Workflow
+## 🔍 Overview
 
-The analysis is based on the **UCI Bank Marketing Dataset**.  
-After cleaning and feature engineering (removing `duration` to avoid leakage and adding features like `was_contacted_before`), several models were trained and calibrated.
+This repository contains the full, reproducible machine learning pipeline developed for my MSc dissertation:  
+**“Well-Calibrated and Interpretable Propensity Models with Calibration and SHAP for Bank Marketing.”**
 
-**Main models tested:**
+The study explores how **probability calibration** and **explainable AI (SHAP)** can improve both the reliability and interpretability of predictive models for direct marketing campaigns.  
+It is based on the **UCI Bank Marketing dataset**, where the goal is to predict whether a client will subscribe to a term deposit.
+
+---
+
+## ✨ Key Contributions
+
+- Developed a **fully reproducible calibration framework** comparing Logistic Regression, CatBoost, XGBoost, and a Stacking ensemble.  
+- Introduced **Isotonic and Sigmoid (Platt)** calibration for improved probability reliability.  
+- Evaluated models using ROC-AUC, PR-AUC, and **Brier Score** for probability calibration.  
+- Integrated **SHAP interpretability** for understanding the most influential behavioral and macroeconomic factors.  
+- Validated a **policy recommendation**: limiting campaign contacts to ≤3 significantly improves conversion (12.1% vs 7.5%, *p < 0.001*).
+
+---
+
+## 📦 Dataset
+
+- **Source:** UCI Machine Learning Repository – Bank Marketing Data  
+- **Target:** `y` (term deposit subscription: yes/no)  
+- **Leakage removed:** `duration`  
+- **Added features:** `was_contacted_before`, `poutcome_success`  
+- **Preprocessing:** one-hot encoding, scaling, class balancing  
+
+If you reuse this dataset, please cite the original UCI Bank Marketing paper.
+
+---
+
+## 🧪 Methods (Pipeline)
+
+**1. Data Preparation**  
+Cleaning, feature selection, and engineered indicators for previous contact and outcome.  
+
+**2. Model Development**  
+Compared:
 - Logistic Regression (baseline)
 - CatBoost
 - XGBoost
-- Stacking (CatBoost + XGBoost)
+- Stacking (Cat + XGB)
 
-**Evaluation metrics:**
+**3. Calibration**  
+Applied **Isotonic** and **Sigmoid** calibration to each model using cross-validation.  
+
+**4. Evaluation Metrics**
 - ROC-AUC  
-- Precision-Recall AUC  
-- Brier Score (for calibration quality)  
-- Calibration Slope and Intercept  
+- PR-AUC  
+- Brier Score  
+- Calibration Slope & Intercept  
 
-Calibration was performed using both **Isotonic** and **Sigmoid (Platt)** scaling.
-
----
-
-## 🧩 Key Results
-
-**Champion model:** Stacking (CatBoost + XGBoost) with Isotonic calibration  
-- ROC-AUC ≈ 0.80  
-- Brier ≈ 0.075  
-- Slope ≈ 1.07  
-- Intercept ≈ 0.10  
-
-The model shows strong reliability and interpretable SHAP explanations.
-
-**Contact frequency policy:**  
-Clients contacted three or fewer times had a significantly higher conversion rate (12.1% vs. 7.5%, *Z = 5.15, p < 0.001*).  
-This supports the rule of limiting marketing calls to ≤3 per client.
-
-**Channel preference:**  
-SHAP results indicate that mobile (cellular) outreach performs better than landline calls.
+**5. Interpretability**
+- Global and local SHAP analysis  
+- Dependence plots for key variables  
+- Subgroup calibration (age-based fairness)
 
 ---
 
-## 🧭 Policy Insights Summary
+## 📈 Results (Summary)
+
+| Model | Calibration | ROC-AUC | Brier | Notes |
+|:------|:-------------|:--------|:------|:------|
+| Logistic Regression | Isotonic | 0.80 | 0.078 | Baseline |
+| CatBoost | Isotonic | 0.80 | 0.076 | Strong calibration |
+| XGBoost | Isotonic | 0.78 | 0.080 | Slightly underfit |
+| **Stacking (Cat+XGB)** | **Isotonic** | **0.80** | **0.075** | ✅ Champion Model |
+
+**Calibration Slope = 1.07**, **Intercept = 0.10**, **CITL ≈ 0.00**
+
+---
+
+## 🧭 Policy Insights
 
 | Policy | Description |
-|:--------|:-------------|
-| **Contact Frequency** | Limit marketing calls to three per client (≤3). Statistically validated using a Z-test (*p < 0.001*). |
-| **Channel Prioritization** | Mobile calls outperform landlines. Finding is correlational, not causal. |
-| **Future Validation** | Future work should test results through small A/B experiments across regions. |
+|:-------|:-------------|
+| **Contact Frequency** | Limit marketing calls to ≤3 per client. Conversion significantly higher (*p < 0.001*). |
+| **Channel Preference** | Mobile outreach performs better than landline. |
+| **Future Validation** | Run small-scale A/B testing to confirm causality across regions. |
 
 ---
 
-## 👩‍💻 Author
+## 🛠️ Quickstart
 
-**Fereshteh Sefarkhani**  
-MSc Data Science — GISMA University of Applied Sciences  
-📧 [fereshteh.safarkhani@gmail.com]
+1. **Environment setup**
+   ```bash
+   pip install pandas numpy matplotlib scikit-learn catboost xgboost shap
+   
+2.**Run notebook**
+jupyter notebook bank_marketing_calibration.ipynb
 
-> Sefarkhani, F. M. (2025). *Well-Calibrated and Interpretable Propensity Models with Calibration and SHAP for Bank Marketing.* MSc Dissertation, GISMA University of Applied Sciences.
+3.**Dataset**
+Place bank-additional-full.csv in the root folder.
+
+4.**Output**
+Calibration plots, SHAP summary, and statistical validation (Z-test) for campaign contact limit.
+
+📂 **Repository Structure**
+├─ data/
+│   └─ bank-additional-full.csv
+├─ figures/
+│   └─ shap_summary.png
+├─ results/
+│   ├─ calibration_curves.png
+│   └─ z_test_contacts.txt
+├─ bank_marketing_calibration.ipynb
+├─ final_results.html
+├─ Dissertation_Fereshteh_Sefarkhani_2025.docx
+├─ requirements.txt
+└─ README.md
+
+**Ethics & Data Integrity**
+Dataset is public (UCI). No personal identifiers are included.
+
+Analysis follows GISMA’s ethics guidance for reproducibility and data handling.
+
+All preprocessing and modeling steps are fully transparent in the notebook.
+
+**🧾 Citation**
+If referencing this work:
+
+Sefarkhani, F. M. (2025). Well-Calibrated and Interpretable Propensity Models with Calibration and SHAP for Bank Marketing.
+MSc Dissertation, GISMA University of Applied Sciences.
+
+**👩‍💻 Author**
+Fereshteh Sefarkhani
+MSc Data Science — GISMA University of Applied Sciences
+📧 fereshteh.safarkhani@gmail.com
+🌍 Berlin, Germany
+
+  
