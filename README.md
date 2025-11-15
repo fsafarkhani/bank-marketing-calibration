@@ -42,99 +42,69 @@ If you reuse this dataset, please cite the original UCI Bank Marketing paper.
 
 **1. Data Preparation**  
 Cleaning, feature selection, and engineered indicators for previous contact and outcome.  
-
-**2. Model Development**  
-Compared:
-- Logistic Regression (baseline)
-- CatBoost
-- XGBoost
-- Stacking (Cat + XGB)
-
-**3. Calibration**  
-Applied **Isotonic** and **Sigmoid** calibration to each model using cross-validation.  
-
-**4. Evaluation Metrics**
-- ROC-AUC  
-- PR-AUC  
-- Brier Score  
-- Calibration Slope & Intercept  
-
-**5. Interpretability**
-- Global and local SHAP analysis  
-- Dependence plots for key variables  
-- Subgroup calibration (age-based fairness)
-
----
-
-## 📈 Results (Summary)
-
-| Model | Calibration | ROC-AUC | Brier | Notes |
-|:------|:-------------|:--------|:------|:------|
-| Logistic Regression | Isotonic | 0.80 | 0.078 | Baseline |
-| CatBoost | Isotonic | 0.80 | 0.076 | Strong calibration |
-| XGBoost | Isotonic | 0.78 | 0.080 | Slightly underfit |
-| **Stacking (Cat+XGB)** | **Isotonic** | **0.80** | **0.075** | ✅ Champion Model |
-
-**Calibration Slope = 1.07**, **Intercept = 0.10**, **CITL ≈ 0.00**
-
----
-
-## 🧭 Policy Insights
-
-| Policy | Description |
-|:-------|:-------------|
-| **Contact Frequency** | Limit marketing calls to ≤3 per client. Conversion significantly higher (*p < 0.001*). |
-| **Channel Preference** | Mobile outreach performs better than landline. |
-| **Future Validation** | Run small-scale A/B testing to confirm causality across regions. |
-
----
-
-## 🛠️ Quickstart
-
-1. **Environment setup**
-   ```bash
-   pip install pandas numpy matplotlib scikit-learn catboost xgboost shap
-   
-2.**Run notebook**
+### 2️⃣ Run notebook
+```bash
 jupyter notebook bank_marketing_calibration.ipynb
+```
 
-3.**Dataset**
-Place bank-additional-full.csv in the root folder.
+---
 
-4.**Output**
-Calibration plots, SHAP summary, and statistical validation (Z-test) for campaign contact limit.
+### 3️⃣ Dataset
+Place the file **`bank-additional-full.csv`** in the root folder of the repository.
 
-📂 **Repository Structure**
-├─ data/
-│   └─ bank-additional-full.csv
-├─ figures/
-│   └─ shap_summary.png
-├─ results/
-│   ├─ calibration_curves.png
-│   └─ z_test_contacts.txt
-├─ bank_marketing_calibration.ipynb
-├─ final_results.html
-├─ Dissertation_Fereshteh_Sefarkhani_2025.docx
-├─ requirements.txt
-└─ README.md
+---
 
-**Ethics & Data Integrity**
-Dataset is public (UCI). No personal identifiers are included.
+### 4️⃣ Output
+The notebook generates:
+- Calibration plots  
+- SHAP summary charts  
+- Statistical validation (Z-test) confirming the ≤3 contact threshold  
 
-Analysis follows GISMA’s ethics guidance for reproducibility and data handling.
+---
 
-All preprocessing and modeling steps are fully transparent in the notebook.
+## 📂 Repository Structure
+```
+📦 bank-marketing-calibration
+│
+├── data/
+│   └── bank-additional-full.csv
+│
+├── figures/
+│   └── shap_summary.png
+│
+├── results/
+│   ├── calibration_curves.png
+│   └── z_test_contacts.txt
+│
+├── bank_marketing_calibration.ipynb
+├── final_results.html
+├── Dissertation_Fereshteh_Sefarkhani_2025.docx
+├── requirements.txt
+└── README.md
+```
 
-**🧾 Citation**
-If referencing this work:
+---
 
-Sefarkhani, F. M. (2025). Well-Calibrated and Interpretable Propensity Models with Calibration and SHAP for Bank Marketing.
-MSc Dissertation, GISMA University of Applied Sciences.
+## 🔒 Ethics & Data Integrity
 
-**👩‍💻 Author**
-Fereshteh Sefarkhani
-MSc Data Science — GISMA University of Applied Sciences
-📧 fereshteh.safarkhani@gmail.com
+- Dataset is public (UCI). No personal identifiers are included.  
+- Analysis follows **GISMA’s ethics guidance** for reproducibility and data handling.  
+- All preprocessing and modeling steps are fully transparent and reproducible in the notebook.  
+
+---
+
+## 📚 Citation
+
+If referencing this work, please cite:
+
+> **Sefarkhani, F. M. (2025).** *Well-Calibrated and Interpretable Propensity Models with Calibration and SHAP for Bank Marketing.*  
+> MSc Dissertation, GISMA University of Applied Sciences.
+
+---
+
+## 👩‍💻 Author
+
+**Fereshteh Sefarkhani**  
+*MSc Data Science — GISMA University of Applied Sciences*  
+📧 [fereshteh.safarkhani@gmail.com](mailto:fereshteh.safarkhani@gmail.com)  
 🌍 Berlin, Germany
-
-  
