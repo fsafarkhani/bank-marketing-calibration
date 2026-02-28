@@ -91,7 +91,7 @@ The notebook generates:
 
 If referencing this work, please cite:
 
-> **Sefarkhani, F. M. (2025).** *Well-Calibrated and Interpretable Propensity Models with Calibration and SHAP for Bank Marketing.*  
+> **Safarkhani, F. M. (2025).** *Well-Calibrated and Interpretable Propensity Models with Calibration and SHAP for Bank Marketing.*  
 > MSc Dissertation, GISMA University of Applied Sciences.
 
 ---
